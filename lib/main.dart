@@ -47,6 +47,7 @@ class MyHomePage extends ConsumerWidget {
         actions: [
           IconButton(
               onPressed: () {
+                //can be discarded in various ways
                 widgetRef.invalidate(counterProvider);
                 widgetRef.refresh(counterProvider);
                 widgetRef.read(counterProvider.notifier).update((state) => 0);
@@ -69,6 +70,7 @@ class MyHomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //can be incremented in mutiple ways
          widgetRef.read(counterProvider.notifier).state++;
           widgetRef.read(counterProvider.notifier).update((state) => state+1);
 
