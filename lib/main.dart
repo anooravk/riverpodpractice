@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:riverpodpractice/userscreen.dart';
+
+import 'initialscreen.dart';
 
 final nameProvider = Provider<String>((ref) => "hello from riverpod!");
 final counterProvider = StateProvider<int>((ref) => 0);
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const UserScreen(),
     );
   }
 }
