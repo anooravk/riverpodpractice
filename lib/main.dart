@@ -37,8 +37,8 @@ class MyHomePage extends ConsumerWidget {
         print("previous");
       if(next==4)
         print("next");
-      if(name==4)
-        print("four");
+      if(count==4)
+        print("four"); //prints at 5 starts from 0
     });
     return Scaffold(
       appBar: AppBar(
@@ -123,12 +123,14 @@ class _HomeState extends ConsumerState<Home> {
   void initState() {
     super.initState();
     final count = ref.read(counterProvider);
+    //reads one time
     print(count);
   }
 
   @override
   Widget build(BuildContext context) {
     final count = ref.watch(counterProvider);
+    //listens and update ui as value changes,use in build method
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
