@@ -6,35 +6,18 @@ part 'notifier.g.dart';
 @riverpod
 class CounterNotifier extends _$CounterNotifier{
   @override
-  build() {
+  int build() {
     return 0;
   }
 
   void increment(){
-    // state++;
+    state++;
   }
   void decrement(){
-    // state--;
+    state--;
   }
 }
-// class CounterNotifier extends Notifier<int>{
-//   @override
-//   build() {
-//     return 0;
-//   }
-//
-//   void increment(){
-//     state++;
-//   }
-//   void decrement(){
-//     state--;
-//   }
-//
-// }
 
-// final counterNotifierProvider=NotifierProvider<CounterNotifier,int>((){
-//   return CounterNotifier();
-// });
 
 class Count extends ConsumerWidget {
   const Count({super.key});

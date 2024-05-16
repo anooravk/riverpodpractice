@@ -5,6 +5,7 @@ import 'package:riverpodpractice/search.dart';
 import 'package:riverpodpractice/select.dart';
 import 'package:riverpodpractice/userscreen.dart';
 
+import 'bottomnav.dart';
 import 'initialscreen.dart';
 import 'notifier.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: isLightTheme ? ThemeData.light() : ThemeData.dark(),
-      home: const SearchList(),
+      home: const BottomNav(),
     );
   }
 }
