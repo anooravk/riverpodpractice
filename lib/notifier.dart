@@ -11,10 +11,10 @@ class CounterNotifier extends _$CounterNotifier{
   }
 
   void increment(){
-    state++;
+    // state++;
   }
   void decrement(){
-    state--;
+    // state--;
   }
 }
 // class CounterNotifier extends Notifier<int>{

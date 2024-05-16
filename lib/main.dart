@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:riverpodpractice/search.dart';
 import 'package:riverpodpractice/select.dart';
 import 'package:riverpodpractice/userscreen.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: isLightTheme ? ThemeData.light() : ThemeData.dark(),
-      home: const Count(),
+      home: const SearchList(),
     );
   }
 }
