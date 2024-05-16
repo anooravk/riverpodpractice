@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:math';
 
@@ -20,3 +21,34 @@ class Picker extends StateNotifier<String>{
   }
 }
 
+
+class Select extends StateNotifier<GameModel>{
+  Select(super.state);
+
+  void updatePlayerCount(String count){
+    state=state.copyWith(playersCount: count);
+  }
+  void updatePlayMode(String mode){
+   state=state.copyWith(playMode: mode);
+  }
+
+}
+@immutable
+class GameModel {
+  String playersCount;
+  String playMode;
+
+  GameModel({
+    required this.playersCount,
+    required this.playMode,
+  });
+
+  GameModel copyWith({
+    String? playersCount,
+    String? playMode,
+  }) =>
+      GameModel(
+        playersCount: playersCount ?? this.playersCount,
+        playMode: playMode ?? this.playMode,
+      );
+}

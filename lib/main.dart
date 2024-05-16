@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:riverpodpractice/select.dart';
 import 'package:riverpodpractice/userscreen.dart';
 
 import 'initialscreen.dart';
+import 'notifier.dart';
 
 final nameProvider = Provider<String>((ref) => "hello from riverpod!");
 final counterProvider = StateProvider<int>((ref) => 0);
+final themeProvider = StateProvider<bool>((ref) => true);
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isLightTheme = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const UserScreen(),
+      theme: isLightTheme ? ThemeData.light() : ThemeData.dark(),
+      home: const Count(),
     );
   }
 }
@@ -35,17 +36,22 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef widgetRef) {
     final name = widgetRef.watch(nameProvider);
     final count = widgetRef.watch(counterProvider);
+    final isLightTheme = widgetRef.watch(themeProvider);
+
     widgetRef.listen(counterProvider, (previous, next) {
-      if(previous==4)
+      if (previous == 4)
         print("previous");
-      if(next==4)
+      if (next == 4)
         print("next");
-      if(count==4)
+      if (count == 4)
         print("four"); //prints at 5 starts from 0
     });
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         title: Text('RIVERPOD'),
         actions: [
           IconButton(
@@ -62,6 +68,10 @@ class MyHomePage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Switch(value: isLightTheme, onChanged: (value) =>
+            widgetRef
+                .read(themeProvider.notifier)
+                .state = value),
             Text(
               name,
             ),
@@ -74,8 +84,10 @@ class MyHomePage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //can be incremented in mutiple ways
-         widgetRef.read(counterProvider.notifier).state++;
-          widgetRef.read(counterProvider.notifier).update((state) => state+1);
+          widgetRef
+              .read(counterProvider.notifier)
+              .state++;
+          widgetRef.read(counterProvider.notifier).update((state) => state + 1);
 
           print(count);
           print(name);
@@ -93,7 +105,10 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         title: Text('RIVERPOD'),
       ),
       body: Center(
@@ -104,7 +119,9 @@ class MyHome extends StatelessWidget {
               final name = ref.watch(nameProvider);
               return InkWell(
                   onTap: () {
-                    final name = ref.read(counterProvider.notifier).state++;
+                    final name = ref
+                        .read(counterProvider.notifier)
+                        .state++;
                     print(name);
                   },
                   child: Text(name));
@@ -138,7 +155,10 @@ class _HomeState extends ConsumerState<Home> {
     //listens and update ui as value changes,use in build method
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         title: Text('RIVERPOD'),
       ),
       body: Center(
@@ -151,7 +171,9 @@ class _HomeState extends ConsumerState<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final count = ref.read(counterProvider.notifier).state--;
+          final count = ref
+              .read(counterProvider.notifier)
+              .state--;
           print(count);
         },
         child: Icon(Icons.plus_one),
